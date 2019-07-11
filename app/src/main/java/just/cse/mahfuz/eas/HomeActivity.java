@@ -149,7 +149,7 @@ public class HomeActivity extends AppCompatActivity {
             finish();
         }
         if (id==R.id.logout) {
-            progressDialog.setMessage("logging In ...");
+            progressDialog.setMessage("logging Out ...");
             progressDialog.show();
             auth.signOut();
             progressDialog.dismiss();
