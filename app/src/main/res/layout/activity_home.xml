@@ -11,7 +11,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="180dp"
         android:scaleType="fitXY"
         android:src="@drawable/classroom3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +49,7 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/search"
+                    android:id="@+id/attendance"
                     android:layout_width="0dp"
                     android:layout_height="180dp"
                     android:layout_margin="5dp"
@@ -64,31 +64,8 @@
                     android:textSize="18sp" />
 
                 <Button
-                    android:id="@+id/profile"
-                    android:layout_width="0dp"
-                    android:layout_height="180dp"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/semi_round2"
-                    android:drawableTop="@drawable/attendance_icon"
-                    android:paddingTop="25dp"
-                    android:text="View Attendance"
-                    android:textAllCaps="false"
-                    android:textColor="#000"
-                    android:textSize="18sp" />
-            </LinearLayout>
 
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-
-                    android:id="@+id/addAllegation"
+                    android:id="@+id/CTmark"
                     android:layout_width="0dp"
                     android:layout_height="180dp"
                     android:layout_margin="5dp"
@@ -101,9 +78,34 @@
                     android:textAllCaps="false"
                     android:textColor="#000"
                     android:textSize="17sp" />
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/pendingAllegation"
+                    android:id="@+id/viewAttendance"
+                    android:layout_width="0dp"
+                    android:layout_height="180dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/semi_round2"
+                    android:drawableTop="@drawable/attendance_icon"
+                    android:paddingTop="25dp"
+                    android:text="View Attendance"
+                    android:textAllCaps="false"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+
+
+                <Button
+                    android:id="@+id/viewCTmark"
                     android:layout_width="0dp"
                     android:layout_height="180dp"
                     android:layout_margin="5dp"
@@ -126,7 +128,7 @@
 
                 <Button
 
-                    android:id="@+id/libraryAddEntry"
+                    android:id="@+id/courseAssign"
                     android:layout_width="0dp"
                     android:layout_height="180dp"
                     android:layout_margin="5dp"
@@ -141,7 +143,7 @@
                     android:textSize="17sp" />
 
                 <Button
-                    android:id="@+id/libraryRemoveEntry"
+                    android:id="@+id/editCourseAssigned"
                     android:layout_width="0dp"
                     android:layout_height="180dp"
                     android:layout_margin="5dp"
