@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAE0DFDF"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    tools:context=".HomeActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/classroom3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="2dp"
+        android:fontFamily="@font/regular"
+        android:gravity="center"
+        android:text="Department of English"
+        android:textColor="#000000"
+        android:textSize="20sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/search"
+                    android:layout_width="0dp"
+                    android:layout_height="180dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/semi_round2"
+                    android:drawableTop="@drawable/attendance_icon"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:paddingTop="25dp"
+                    android:text="Attendance"
+                    android:textAllCaps="false"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/profile"
+                    android:layout_width="0dp"
+                    android:layout_height="180dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/semi_round2"
+                    android:drawableTop="@drawable/attendance_icon"
+                    android:paddingTop="25dp"
+                    android:text="View Attendance"
+                    android:textAllCaps="false"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+
+                    android:id="@+id/addAllegation"
+                    android:layout_width="0dp"
+                    android:layout_height="180dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/semi_round2"
+                    android:drawableTop="@drawable/exam"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:paddingTop="40dp"
+                    android:text="CT mark"
+                    android:textAllCaps="false"
+                    android:textColor="#000"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/pendingAllegation"
+                    android:layout_width="0dp"
+                    android:layout_height="180dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/semi_round2"
+                    android:drawableTop="@drawable/exam"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:paddingTop="40dp"
+                    android:text="View CT mark"
+                    android:textAllCaps="false"
+                    android:textColor="#000"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+
+                    android:id="@+id/libraryAddEntry"
+                    android:layout_width="0dp"
+                    android:layout_height="180dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/semi_round2"
+                    android:drawableTop="@drawable/course_assign"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:paddingTop="40dp"
+                    android:text="Assign course"
+                    android:textAllCaps="false"
+                    android:textColor="#000"
+                    android:textSize="17sp" />
+
+                <Button
+                    android:id="@+id/libraryRemoveEntry"
+                    android:layout_width="0dp"
+                    android:layout_height="180dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/semi_round2"
+                    android:drawableTop="@drawable/course_assign"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:paddingTop="40dp"
+                    android:text="Edit course"
+                    android:textAllCaps="false"
+                    android:textColor="#000"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+</LinearLayout>
