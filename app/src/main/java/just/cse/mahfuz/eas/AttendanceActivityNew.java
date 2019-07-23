@@ -1,6 +1,7 @@
 package just.cse.mahfuz.eas;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -42,6 +44,8 @@ public class AttendanceActivityNew extends AppCompatActivity {
     ProgressDialog progressDialog;
 
     FirebaseFirestore firebaseFirestore;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +109,7 @@ public class AttendanceActivityNew extends AppCompatActivity {
 
                                 }
                             }
-                            attendaneRecyclerAdapter= new AttendaneRecyclerAdapter(AttendanceActivityNew.this,sRoll);
+                            attendaneRecyclerAdapter= new AttendaneRecyclerAdapter(AttendanceActivityNew.this,sRoll,sYear,sSemester,sCourseID,sDate);
                             recyclerView.setAdapter(attendaneRecyclerAdapter);
                             progressDialog.dismiss();
                         } else {
@@ -123,4 +127,6 @@ public class AttendanceActivityNew extends AppCompatActivity {
 
 
     }
+
+
 }
