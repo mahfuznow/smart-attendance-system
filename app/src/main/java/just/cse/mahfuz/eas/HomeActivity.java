@@ -93,6 +93,19 @@ public class HomeActivity extends AppCompatActivity {
                     progressDialog.dismiss();
 
                 }
+                else if ("test".equals(mycategory)) {
+
+                    attendance.setVisibility(View.VISIBLE);
+                    viewAttendance.setVisibility(View.VISIBLE);
+                    CTmark.setVisibility(View.VISIBLE);
+                    viewCTmark.setVisibility(View.VISIBLE);
+                    courseAssign.setVisibility(View.VISIBLE);
+                    editCourseAssigned.setVisibility(View.VISIBLE);
+                    progressDialog.dismiss();
+
+                    progressDialog.dismiss();
+
+                }
 
             }
         });
@@ -101,7 +114,7 @@ public class HomeActivity extends AppCompatActivity {
         attendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this,Attendance.class));
+                startActivity(new Intent(HomeActivity.this,AttendanceActivityNew.class));
             }
         });
         courseAssign.setOnClickListener(new View.OnClickListener() {
