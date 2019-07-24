@@ -79,7 +79,13 @@ public class AttendaneRecyclerAdapter extends RecyclerView.Adapter<AttendaneRecy
 
 
         if (i<sRoll.size()) {
-            attendanceViewHolder.serial.setText("0"+(i+1)+".");
+            if (i<9) {
+                attendanceViewHolder.serial.setText("0"+(i+1)+".");
+            }
+            else {
+                attendanceViewHolder.serial.setText((i+1)+".");
+            }
+
             attendanceViewHolder.roll.setText(sRoll.get(i));
 
             if (!itemStateArray.get(i, false)) {

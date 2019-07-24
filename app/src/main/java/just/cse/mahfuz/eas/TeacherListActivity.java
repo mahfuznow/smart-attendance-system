@@ -19,7 +19,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-import just.cse.mahfuz.eas.adapter.TeacherRecycleAdapter;
+import just.cse.mahfuz.eas.adapter.TeacherRecyclerAdapter;
 import just.cse.mahfuz.eas.model.Teacher;
 
 public class TeacherListActivity extends AppCompatActivity {
@@ -31,7 +31,7 @@ public class TeacherListActivity extends AppCompatActivity {
 
     List<Teacher> teacherModel;
 
-    TeacherRecycleAdapter teacherRecycleAdapter;
+    TeacherRecyclerAdapter teacherRecycleAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class TeacherListActivity extends AppCompatActivity {
                                     return;
                                 } else {
                                     teacherModel=task.getResult().toObjects(Teacher.class);
-                                    teacherRecycleAdapter = new TeacherRecycleAdapter (TeacherListActivity.this, teacherModel);
+                                    teacherRecycleAdapter = new TeacherRecyclerAdapter(TeacherListActivity.this, teacherModel);
                                     mRecyclerView.setAdapter(teacherRecycleAdapter);
                                     progressDialog.dismiss();
                                 }

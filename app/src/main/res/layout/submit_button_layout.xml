@@ -12,7 +12,8 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:background="@drawable/round_white"
-        android:backgroundTint="@color/colorOrangeDark"
+        android:backgroundTint="@color/colorPinkOrange"
         android:text="Submit"
+        android:textColor="#fff"
         />
 </LinearLayout>

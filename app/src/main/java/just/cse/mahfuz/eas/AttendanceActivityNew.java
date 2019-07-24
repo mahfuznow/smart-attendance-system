@@ -66,14 +66,31 @@ public class AttendanceActivityNew extends AppCompatActivity {
         progressDialog.show();
 
         try {
-            sDept = getIntent().getExtras().getString("dept");
-            sYear = getIntent().getExtras().getString("year");
-            sSemester = getIntent().getExtras().getString("semester");
-        } catch (Exception e) {
+            //sDept = getIntent().getExtras().getString("dept");
             sDept="cse";
-            sYear="3";
-            sSemester="2";
-            sCourseID="CSE-3201";
+            sCourseID = getIntent().getExtras().getString("courseID");
+            sCourseName = getIntent().getExtras().getString("courseName");
+
+            courseID.setText(sCourseID);
+            courseName.setText(sCourseName);
+
+            if ("-".equals(String.valueOf(sCourseID.charAt(2)))) {
+                sYear=String.valueOf(sCourseID.charAt(3));
+                sSemester=String.valueOf(sCourseID.charAt(4));
+            }
+            else if ("-".equals(String.valueOf(sCourseID.charAt(3)))) {
+                sYear=String.valueOf(sCourseID.charAt(4));
+                sSemester=String.valueOf(sCourseID.charAt(5));
+            }
+
+//            sYear = getIntent().getExtras().getString("year");
+//            sSemester = getIntent().getExtras().getString("semester");
+
+        } catch (Exception e) {
+//            sDept="cse";
+//            sYear="3";
+//            sSemester="2";
+//            sCourseID="CSE-3201";
         }
 
         final String timeInMill=String.valueOf(System.currentTimeMillis());

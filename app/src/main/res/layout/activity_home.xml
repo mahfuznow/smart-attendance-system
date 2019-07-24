@@ -56,12 +56,11 @@
                     android:layout_weight="1"
                     android:background="@drawable/semi_round2"
                     android:drawableTop="@drawable/attendance_icon"
-                    android:foreground="?attr/selectableItemBackground"
                     android:paddingTop="25dp"
                     android:text="Attendance"
                     android:textAllCaps="false"
                     android:textColor="#000"
-                    android:textSize="18sp" />
+                    android:textSize="17sp" />
 
                 <Button
 
@@ -72,8 +71,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/semi_round2"
                     android:drawableTop="@drawable/exam"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:paddingTop="40dp"
+                    android:paddingTop="25dp"
                     android:text="CT mark"
                     android:textAllCaps="false"
                     android:textColor="#000"
@@ -100,7 +98,7 @@
                     android:text="View Attendance"
                     android:textAllCaps="false"
                     android:textColor="#000"
-                    android:textSize="18sp" />
+                    android:textSize="17sp" />
 
 
 
@@ -112,8 +110,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/semi_round2"
                     android:drawableTop="@drawable/exam"
-                    android:foreground="?attr/selectableItemBackground"
-                    android:paddingTop="40dp"
+                    android:paddingTop="25dp"
                     android:text="View CT mark"
                     android:textAllCaps="false"
                     android:textColor="#000"
@@ -135,7 +132,6 @@
                     android:layout_weight="1"
                     android:background="@drawable/semi_round2"
                     android:drawableTop="@drawable/course_assign"
-                    android:foreground="?attr/selectableItemBackground"
                     android:paddingTop="40dp"
                     android:text="Assign course"
                     android:textAllCaps="false"
@@ -150,7 +146,6 @@
                     android:layout_weight="1"
                     android:background="@drawable/semi_round2"
                     android:drawableTop="@drawable/course_assign"
-                    android:foreground="?attr/selectableItemBackground"
                     android:paddingTop="40dp"
                     android:text="Edit course"
                     android:textAllCaps="false"

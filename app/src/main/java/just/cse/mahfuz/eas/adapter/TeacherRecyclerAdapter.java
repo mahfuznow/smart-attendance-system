@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,20 +14,21 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import just.cse.mahfuz.eas.AssignCourseActivity;
 import just.cse.mahfuz.eas.R;
 import just.cse.mahfuz.eas.model.Teacher;
 
-public class TeacherRecycleAdapter extends RecyclerView.Adapter<TeacherRecycleAdapter.teacherViewHolder> {
+public class TeacherRecyclerAdapter extends RecyclerView.Adapter<TeacherRecyclerAdapter.teacherViewHolder> {
 
     Context context;
     List<Teacher> teacherList;
 
     String sName,sDesignation,sEmail,sImage,sShortName;
-    public TeacherRecycleAdapter() {
+    public TeacherRecyclerAdapter() {
     }
 
-    public TeacherRecycleAdapter(Context context, List<Teacher> teacherList) {
+    public TeacherRecyclerAdapter(Context context, List<Teacher> teacherList) {
         this.context = context;
         this.teacherList = teacherList;
 
@@ -86,7 +86,7 @@ public class TeacherRecycleAdapter extends RecyclerView.Adapter<TeacherRecycleAd
 
     public class teacherViewHolder extends RecyclerView.ViewHolder{
 
-        ImageView image;
+        CircleImageView image;
         TextView name,designation,email,shortName;
         LinearLayout linearLayout;
         public teacherViewHolder(@NonNull View itemView) {

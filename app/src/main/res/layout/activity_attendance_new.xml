@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".AttendanceActivityNew"
     android:orientation="vertical"
+    android:background="#D4FFD9"
     >
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,10 +14,10 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:orientation="vertical"
-        android:background="@drawable/semi_round"
-        android:backgroundTint="#D4FFD9"
-        android:layout_margin="5dp"
+        android:background="@drawable/round_white"
+        android:layout_margin="10dp"
         android:padding="5dp"
+        android:backgroundTint="#ADFFB6"
         >
         <TextView
             android:id="@+id/date"
@@ -25,6 +26,7 @@
             android:fontFamily="@font/regular"
             android:text="Date: "
             android:textSize="18sp"
+
 
             />
 
@@ -36,6 +38,7 @@
             android:text="Course ID: "
             android:textSize="18sp"
 
+
             />
 
         <TextView
@@ -45,6 +48,7 @@
             android:fontFamily="@font/regular"
             android:text="Course Name: "
             android:textSize="18sp"
+
 
             />
 
@@ -59,7 +63,11 @@
         android:orientation="horizontal"
         android:background="@drawable/round_white"
         android:backgroundTint="#B3FDB6"
-        android:padding="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_margin="3dp"
         >
 
         <TextView
@@ -99,7 +107,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"
-        android:background="#D4FFD9"
+
         />
 
 </LinearLayout>
