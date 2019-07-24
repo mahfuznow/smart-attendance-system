@@ -3,12 +3,14 @@ package just.cse.mahfuz.eas;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -56,7 +58,12 @@ public class SelectCourseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_assign_course);
+        setContentView(R.layout.activity_select_course);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Select Course");
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth=FirebaseAuth.getInstance();
         uid=firebaseAuth.getUid();
@@ -136,5 +143,18 @@ public class SelectCourseActivity extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id==android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

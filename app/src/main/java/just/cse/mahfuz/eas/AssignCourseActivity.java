@@ -2,20 +2,19 @@ package just.cse.mahfuz.eas;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,9 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 import just.cse.mahfuz.eas.adapter.CourseRecyclerAdapter;
-import just.cse.mahfuz.eas.adapter.TeacherRecyclerAdapter;
 import just.cse.mahfuz.eas.model.Course;
-import just.cse.mahfuz.eas.model.Teacher;
 
 public class AssignCourseActivity extends AppCompatActivity {
     String shortName;
@@ -54,6 +51,11 @@ public class AssignCourseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assign_course);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Assign Course");
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         firebaseFirestore = FirebaseFirestore.getInstance();
         progressDialog = new ProgressDialog(AssignCourseActivity.this);
         addCourse=findViewById(R.id.add);
@@ -73,6 +75,86 @@ public class AssignCourseActivity extends AppCompatActivity {
         }
 
 
+        loadCourses();
+
+
+        addCourse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(AssignCourseActivity.this);
+
+                View view = LayoutInflater.from(AssignCourseActivity.this).inflate(R.layout.custom_dialog_input_course, null);
+                builder.setView(view);
+                builder.setCancelable(true);
+                final AlertDialog alertDialog = builder.create();
+
+                final EditText courseID = view.findViewById(R.id.courseID);
+                final EditText courseName = view.findViewById(R.id.courseName);
+                Button assign = view.findViewById(R.id.assign);
+
+                assign.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        progressDialog.setMessage("Assigning course...");
+                        progressDialog.show();
+
+                        String sCourseID,sCourseName;
+                        sCourseID=courseID.getText().toString().trim();
+                        sCourseName=courseName.getText().toString().trim();
+
+                        if (TextUtils.isEmpty(sCourseID) || TextUtils.isEmpty(sCourseName)) {
+                            Toast.makeText(AssignCourseActivity.this,"Please insert required fields",Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                        }
+                        else if (   ("-".equals(String.valueOf(sCourseID.charAt(2))) || "-".equals(String.valueOf(sCourseID.charAt(3))))  && (sCourseID.length()>=7)) {
+                            Map<String,Object> setCourse= new HashMap<>();
+                            setCourse.put("courseID",sCourseID);
+                            setCourse.put("courseName",sCourseName);
+                            setCourse.put("teacher",shortName);
+                            firebaseFirestore.collection("university").document("just")
+                                    .collection("a")
+                                    .document("cse")
+                                    .collection("teacher")
+                                    .document(shortName)
+                                    .collection("course")
+                                    .document(sCourseID)
+                                    .set(setCourse)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            Toast.makeText(AssignCourseActivity.this,"Added Successfully",Toast.LENGTH_SHORT).show();
+                                            loadCourses();
+                                            alertDialog.dismiss();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(AssignCourseActivity.this,"Error occured",Toast.LENGTH_SHORT).show();
+                                            progressDialog.dismiss();
+                                            alertDialog.dismiss();
+                                        }
+                                    })
+                            ;
+                        }
+                        else {
+                            Toast.makeText(AssignCourseActivity.this,"Course Id format is invalid",Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+
+                        }
+
+
+
+                    }
+                });
+
+                alertDialog.show();
+            }
+        });
+    }
+
+
+    public void loadCourses() {
         courseModel = new ArrayList<>();
 
         firebaseFirestore.collection("university").document("just")
@@ -113,76 +195,18 @@ public class AssignCourseActivity extends AppCompatActivity {
                 progressDialog.dismiss();
             }
         });
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id==android.R.id.home) {
+            finish();
+        }
 
-        addCourse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(AssignCourseActivity.this);
-
-                View view = LayoutInflater.from(AssignCourseActivity.this).inflate(R.layout.custom_dialog_input, null);
-                builder.setView(view);
-                builder.setCancelable(true);
-                final AlertDialog alertDialog = builder.create();
-
-                final EditText courseID = view.findViewById(R.id.courseID);
-                final EditText courseName = view.findViewById(R.id.courseName);
-                Button assign = view.findViewById(R.id.assign);
-
-                assign.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        progressDialog.setMessage("Assigning course...");
-                        progressDialog.show();
-
-                        String sCourseID,sCourseName;
-                        sCourseID=courseID.getText().toString();
-                        sCourseName=courseName.getText().toString();
-
-                        if (   ("-".equals(String.valueOf(sCourseID.charAt(2))) || "-".equals(String.valueOf(sCourseID.charAt(3))))  && (sCourseID.length()>=7)) {
-                            Map<String,Object> setCourse= new HashMap<>();
-                            setCourse.put("courseID",sCourseID);
-                            setCourse.put("courseName",sCourseName);
-                            setCourse.put("teacher",shortName);
-                            firebaseFirestore.collection("university").document("just")
-                                    .collection("a")
-                                    .document("cse")
-                                    .collection("teacher")
-                                    .document(shortName)
-                                    .collection("course")
-                                    .document(sCourseID)
-                                    .set(setCourse)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            Toast.makeText(AssignCourseActivity.this,"Added Successfully",Toast.LENGTH_SHORT).show();
-                                            progressDialog.dismiss();
-                                            alertDialog.dismiss();
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(AssignCourseActivity.this,"Error occured",Toast.LENGTH_SHORT).show();
-                                            progressDialog.dismiss();
-                                            alertDialog.dismiss();
-                                        }
-                                    })
-                            ;
-                        }
-                        else {
-                            Toast.makeText(AssignCourseActivity.this,"Course Id format is invalid",Toast.LENGTH_SHORT).show();
-                            progressDialog.dismiss();
-                            alertDialog.dismiss();
-                        }
-
-
-
-                    }
-                });
-
-                alertDialog.show();
-            }
-        });
+        return super.onOptionsItemSelected(item);
     }
 }

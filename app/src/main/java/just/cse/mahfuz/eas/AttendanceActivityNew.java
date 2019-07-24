@@ -3,6 +3,7 @@ package just.cse.mahfuz.eas;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -51,6 +52,10 @@ public class AttendanceActivityNew extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attendance_new);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("Take Attendance");
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         date = findViewById(R.id.date);
         courseID = findViewById(R.id.courseID);

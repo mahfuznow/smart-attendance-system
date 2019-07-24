@@ -21,7 +21,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class HomeActivity extends AppCompatActivity {
-    Button attendance,viewAttendance,CTmark,viewCTmark,courseAssign,editCourseAssigned;
+    Button attendance,viewAttendance,CTmark,viewCTmark,courseAssign, studentAssign;
 
     FirebaseFirestore firebaseFirestore;
     String mycategory, uid;
@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
         viewCTmark = findViewById(R.id.viewCTmark);
 
         courseAssign = findViewById(R.id.courseAssign);
-        editCourseAssigned = findViewById(R.id.editCourseAssigned);
+        studentAssign = findViewById(R.id.studentAssign);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
@@ -67,7 +67,7 @@ public class HomeActivity extends AppCompatActivity {
                     CTmark.setVisibility(View.GONE);
                     viewCTmark.setVisibility(View.GONE);
                     courseAssign.setVisibility(View.VISIBLE);
-                    editCourseAssigned.setVisibility(View.VISIBLE);
+                    studentAssign.setVisibility(View.VISIBLE);
                     progressDialog.dismiss();
                 }
                 else if ("teacher".equals(mycategory)) {
@@ -77,7 +77,7 @@ public class HomeActivity extends AppCompatActivity {
                     CTmark.setVisibility(View.VISIBLE);
                     viewCTmark.setVisibility(View.VISIBLE);
                     courseAssign.setVisibility(View.GONE);
-                    editCourseAssigned.setVisibility(View.GONE);
+                    studentAssign.setVisibility(View.GONE);
                     progressDialog.dismiss();
 
                     progressDialog.dismiss();
@@ -89,7 +89,7 @@ public class HomeActivity extends AppCompatActivity {
                     CTmark.setVisibility(View.GONE);
                     viewCTmark.setVisibility(View.VISIBLE);
                     courseAssign.setVisibility(View.GONE);
-                    editCourseAssigned.setVisibility(View.GONE);
+                    studentAssign.setVisibility(View.GONE);
                     progressDialog.dismiss();
 
                     progressDialog.dismiss();
@@ -102,7 +102,7 @@ public class HomeActivity extends AppCompatActivity {
                     CTmark.setVisibility(View.VISIBLE);
                     viewCTmark.setVisibility(View.VISIBLE);
                     courseAssign.setVisibility(View.VISIBLE);
-                    editCourseAssigned.setVisibility(View.VISIBLE);
+                    studentAssign.setVisibility(View.VISIBLE);
                     progressDialog.dismiss();
 
                     progressDialog.dismiss();
@@ -123,6 +123,18 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HomeActivity.this,TeacherListActivity.class));
+            }
+        });
+        studentAssign.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,StudentAssignActivity.class));
+            }
+        });
+        viewAttendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,ViewAttendanceActivity.class));
             }
         });
 

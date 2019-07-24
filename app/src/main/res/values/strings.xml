@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">E-AttendenceSystem</string>
+
+    <string-array name="year">
+        <item>--Year--</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+
+    <string-array name="semester">
+        <item>--Semester--</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
 </resources>

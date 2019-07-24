@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AssignCourseActivity">
+    tools:context=".StudentAssignActivity">
 
 
     <android.support.v7.widget.RecyclerView
@@ -20,14 +20,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
     <Button
-        android:id="@+id/add"
+        android:id="@+id/modify"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="bottom|start"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/add"
-        android:text="+"
+        android:text="*"
         android:textColor="#fff"
         android:textSize="35dp"
 
