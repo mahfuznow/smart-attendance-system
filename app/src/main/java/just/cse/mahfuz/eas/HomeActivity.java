@@ -134,7 +134,9 @@ public class HomeActivity extends AppCompatActivity {
         viewAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this,ViewAttendanceActivity.class));
+                Intent intent= new Intent(HomeActivity.this,SelectCourseActivity.class);
+                intent.putExtra("type","v");
+                startActivity(intent);
             }
         });
 

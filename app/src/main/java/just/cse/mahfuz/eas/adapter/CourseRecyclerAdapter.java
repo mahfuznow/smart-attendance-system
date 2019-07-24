@@ -52,13 +52,26 @@ public class CourseRecyclerAdapter extends RecyclerView.Adapter<CourseRecyclerAd
         courseViewHolder.courseName.setText(courseName);
         courseViewHolder.teacher.setText(teacher);
 
-        if ("select".equals(type)) {
+        if ("selectt".equals(type)) {
             courseViewHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent= new Intent(context, AttendanceActivityNew.class);
                     intent.putExtra("courseID",courseID);
                     intent.putExtra("courseName",courseName);
+                    intent.putExtra("type","t");
+                    context.startActivity(intent);
+                }
+            });
+        }
+        else if ("selectv".equals(type)) {
+            courseViewHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent= new Intent(context, AttendanceActivityNew.class);
+                    intent.putExtra("courseID",courseID);
+                    intent.putExtra("courseName",courseName);
+                    intent.putExtra("type","v");
                     context.startActivity(intent);
                 }
             });

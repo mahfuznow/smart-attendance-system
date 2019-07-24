@@ -54,6 +54,7 @@ public class SelectCourseActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
 
     Button addCourse;
+    String sType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +78,13 @@ public class SelectCourseActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading..");
         progressDialog.show();
 
+
+        try {
+            sType=getIntent().getExtras().getString("type");
+        }
+        catch (Exception e) {
+            sType="t";
+        }
 
         firebaseFirestore.collection("users").document(uid).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -105,7 +113,7 @@ public class SelectCourseActivity extends AppCompatActivity {
                                                 return;
                                             } else {
                                                 courseModel =task.getResult().toObjects(Course.class);
-                                                courseRecyclerAdapter = new CourseRecyclerAdapter(SelectCourseActivity.this, courseModel,"select");
+                                                courseRecyclerAdapter = new CourseRecyclerAdapter(SelectCourseActivity.this, courseModel,"select"+sType);
                                                 mRecyclerView.setAdapter(courseRecyclerAdapter);
                                                 progressDialog.dismiss();
                                             }

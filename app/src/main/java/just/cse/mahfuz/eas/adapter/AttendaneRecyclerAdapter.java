@@ -1,5 +1,6 @@
 package just.cse.mahfuz.eas.adapter;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -201,7 +202,7 @@ public class AttendaneRecyclerAdapter extends RecyclerView.Adapter<AttendaneRecy
                             if (finalI ==sRoll.size()-1) {
                                 progressDialog.dismiss();
                                 Toast.makeText(context,"Done",Toast.LENGTH_SHORT).show();
-
+                                ((Activity)context).finish();
                             }
                         }
                     })
