@@ -53,6 +53,8 @@ public class CourseRecyclerAdapter extends RecyclerView.Adapter<CourseRecyclerAd
         courseViewHolder.teacher.setText(teacher);
 
         if ("selectt".equals(type)) {
+
+
             courseViewHolder.linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

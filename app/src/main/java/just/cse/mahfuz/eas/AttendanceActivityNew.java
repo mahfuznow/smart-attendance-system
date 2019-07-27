@@ -59,7 +59,7 @@ public class AttendanceActivityNew extends AppCompatActivity {
 
     FirebaseFirestore firebaseFirestore;
 
-    private SparseBooleanArray itemStateArray= new SparseBooleanArray();
+    private SparseBooleanArray itemStateArray = new SparseBooleanArray();
 
 
     Calendar calendar;
@@ -194,6 +194,8 @@ public class AttendanceActivityNew extends AppCompatActivity {
 
         //this is for taking attendance
         else {
+
+
             final String timeInMill = String.valueOf(System.currentTimeMillis());
             sDate = DateFormat.format("dd.MM.yy", Long.parseLong(timeInMill)).toString();
 
@@ -227,9 +229,39 @@ public class AttendanceActivityNew extends AppCompatActivity {
 
                                     }
                                 }
-                                attendaneRecyclerAdapter = new AttendaneRecyclerAdapter(AttendanceActivityNew.this, sRoll, sYear, sSemester, sCourseID, sDate);
-                                recyclerView.setAdapter(attendaneRecyclerAdapter);
-                                progressDialog.dismiss();
+
+                //checking attendance is present or not
+                                firebaseFirestore.collection("university").document("just")
+                                        .collection("a")
+                                        .document("cse")
+                                        .collection(sYear)
+                                        .document(sSemester)
+                                        .collection("course")
+                                        .document(sCourseID)
+                                        .collection(sRoll.get(1))
+                                        .document(sDate)
+                                        .get()
+                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                if (task.isSuccessful()) {
+
+                                                    if (task.getResult().exists()) {
+                                                        Toast.makeText(AttendanceActivityNew.this, "Today's attendance has been taken", Toast.LENGTH_SHORT).show();
+                                                        finish();
+                                                    } else {
+                                                        attendaneRecyclerAdapter = new AttendaneRecyclerAdapter(AttendanceActivityNew.this, sRoll, sYear, sSemester, sCourseID, sDate);
+                                                        recyclerView.setAdapter(attendaneRecyclerAdapter);
+                                                        progressDialog.dismiss();
+                                                    }
+                                                } else {
+
+                                                    Toast.makeText(AttendanceActivityNew.this, "Error", Toast.LENGTH_SHORT).show();
+
+                                                }
+                                            }
+                                        });
+
                             } else {
                                 Log.e("Error", "Error getting documents: ", task.getException());
                                 progressDialog.dismiss();
@@ -249,7 +281,7 @@ public class AttendanceActivityNew extends AppCompatActivity {
         progressDialog.show();
 
 
-        for (int i=0;i<sRoll.size();i++) {
+        for (int i = 0; i < sRoll.size(); i++) {
 
             final int finalI = i;
             firebaseFirestore.collection("university").document("just")
@@ -281,6 +313,8 @@ public class AttendanceActivityNew extends AppCompatActivity {
                                     }
                                 }
 
+
+                            } else {
 
                             }
                         }
