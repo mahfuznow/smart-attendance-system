@@ -1,8 +1,8 @@
 package just.cse.mahfuz.eas;
 
 import android.app.ProgressDialog;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -16,7 +16,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.google.firestore.admin.v1beta1.Progress;
 
 import java.util.ArrayList;
 import java.util.HashMap;

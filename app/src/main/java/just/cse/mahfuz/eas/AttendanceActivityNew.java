@@ -2,18 +2,19 @@ package just.cse.mahfuz.eas;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.util.SparseBooleanArray;
-import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,20 +23,13 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Nullable;
 
 import just.cse.mahfuz.eas.adapter.AttendaneRecyclerAdapter;
 import just.cse.mahfuz.eas.adapter.ViewAttendaneRecyclerAdapter;
@@ -230,7 +224,7 @@ public class AttendanceActivityNew extends AppCompatActivity {
                                     }
                                 }
 
-                //checking attendance is present or not
+                                //checking attendance is present or not
                                 firebaseFirestore.collection("university").document("just")
                                         .collection("a")
                                         .document("cse")

@@ -11,7 +11,7 @@
 
     >
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/abgHeader"
         android:layout_width="match_parent"
         android:layout_height="220dp"
@@ -81,6 +81,21 @@
         android:layout_alignParentRight="true"
         android:src="@drawable/circlet" />
 
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="300dp"
+        android:layout_marginEnd="0dp"
+        android:elevation="21dp"
+        android:src="@drawable/app_icon"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        />
+
     <ScrollView
         android:id="@+id/asv"
         android:layout_width="match_parent"
@@ -88,26 +103,32 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp">
+            android:layout_marginTop="50dp"
+            >
 
-            <android.support.v7.widget.CardView
+
+
+            <androidx.cardview.widget.CardView
                 android:id="@+id/acv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
+                android:layout_margin="40dp"
                 app:cardCornerRadius="10dp"
-                app:cardElevation="4dp">
+                app:cardElevation="20dp">
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="35dp"
-
+                    android:layout_height="300dp"
+                    android:paddingBottom="30dp"
+                    android:gravity="center"
                     >
 
+
+
                     <TextView
+
                         android:id="@+id/atvUsername"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -154,7 +175,7 @@
 
                 </RelativeLayout>
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <RelativeLayout
                 android:id="@+id/arl"
@@ -165,7 +186,9 @@
                 android:layout_marginTop="-20dp"
                 android:layout_marginRight="-20dp"
                 android:elevation="10dp"
-                android:transitionName="circleTes"></RelativeLayout>
+                android:transitionName="circleTes">
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -177,7 +200,7 @@
                 android:layout_marginLeft="35dp"
                 android:layout_marginRight="35dp"
                 android:layout_marginBottom="-20dp"
-                android:elevation="10dp">
+                android:elevation="25dp">
 
                 <Button
                     android:id="@+id/login"

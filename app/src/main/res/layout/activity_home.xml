@@ -27,7 +27,7 @@
         android:layout_marginBottom="2dp"
         android:fontFamily="@font/regular"
         android:gravity="center"
-        android:text="Department of English"
+        android:text="Department of CSE"
         android:textColor="#000000"
         android:textSize="20sp" />
 

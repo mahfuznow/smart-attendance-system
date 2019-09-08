@@ -2,12 +2,12 @@ package just.cse.mahfuz.eas;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,7 +25,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -34,10 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import just.cse.mahfuz.eas.adapter.AttendaneRecyclerAdapter;
-import just.cse.mahfuz.eas.adapter.CourseRecyclerAdapter;
 import just.cse.mahfuz.eas.adapter.StudentRecyclerAdapter;
-import just.cse.mahfuz.eas.model.Course;
 
 public class StudentAssignActivity extends AppCompatActivity {
 

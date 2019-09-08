@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewAttendanceActivity"></activity>
+
+        <activity android:name=".ViewAttendanceActivity" />
         <activity android:name=".StudentAssignActivity" />
         <activity android:name=".SelectCourseActivity" />
         <activity android:name=".AttendanceActivityNew" />
@@ -17,12 +18,17 @@
         <activity android:name=".TeacherListActivity" />
         <activity android:name=".Attendance" />
         <activity android:name=".HomeActivity" />
+
+
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/NoActionBar">
+            android:theme="@style/NoActionBar"></activity>
+
+        <activity
+            android:name=".SplashScreenActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

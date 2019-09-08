@@ -2,8 +2,8 @@ package just.cse.mahfuz.eas.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,8 +69,6 @@ public class TeacherRecyclerAdapter extends RecyclerView.Adapter<TeacherRecycler
             public void onClick(View view) {
 
                String  shortName= teacherViewHolder.shortName.getText().toString();
-
-
                 Intent intent= new Intent(context, AssignCourseActivity.class);
                 intent.putExtra("shortName",shortName);
                 context.startActivity(intent);
