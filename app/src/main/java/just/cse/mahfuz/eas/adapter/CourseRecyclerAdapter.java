@@ -23,13 +23,16 @@ public class CourseRecyclerAdapter extends RecyclerView.Adapter<CourseRecyclerAd
 
     String courseID,courseName,teacher;
     String type;
+    String myunit,mydepartment;
     public CourseRecyclerAdapter() {
     }
 
-    public CourseRecyclerAdapter(Context context, List<Course> courseList,String type) {
+    public CourseRecyclerAdapter(Context context, List<Course> courseList,String type,String myunit,String mydepartment) {
         this.context = context;
         this.courseList = courseList;
         this.type = type;
+        this.myunit = myunit;
+        this.mydepartment = mydepartment;
 
     }
 
@@ -61,6 +64,8 @@ public class CourseRecyclerAdapter extends RecyclerView.Adapter<CourseRecyclerAd
                     Intent intent= new Intent(context, AttendanceActivityNew.class);
                     intent.putExtra("courseID",courseID);
                     intent.putExtra("courseName",courseName);
+                    intent.putExtra("unit",myunit);
+                    intent.putExtra("department",mydepartment);
                     intent.putExtra("type","t");
                     context.startActivity(intent);
                 }
@@ -73,6 +78,8 @@ public class CourseRecyclerAdapter extends RecyclerView.Adapter<CourseRecyclerAd
                     Intent intent= new Intent(context, AttendanceActivityNew.class);
                     intent.putExtra("courseID",courseID);
                     intent.putExtra("courseName",courseName);
+                    intent.putExtra("unit",myunit);
+                    intent.putExtra("department",mydepartment);
                     intent.putExtra("type","v");
                     context.startActivity(intent);
                 }

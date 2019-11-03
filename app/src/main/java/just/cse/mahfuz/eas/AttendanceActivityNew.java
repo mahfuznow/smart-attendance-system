@@ -40,6 +40,7 @@ public class AttendanceActivityNew extends AppCompatActivity {
     ImageView present, absent;
 
     String sDept, sYear, sSemester;
+    String myunit, mydepartment;
     String sType;
     String sDate, sCourseID, sCourseName;
     List<String> sRoll;
@@ -87,9 +88,10 @@ public class AttendanceActivityNew extends AppCompatActivity {
 
         try {
             //sDept = getIntent().getExtras().getString("dept");
-            sDept = "cse";
             sCourseID = getIntent().getExtras().getString("courseID");
             sCourseName = getIntent().getExtras().getString("courseName");
+            myunit = getIntent().getExtras().getString("unit");
+            mydepartment = getIntent().getExtras().getString("department");
             sType = getIntent().getExtras().getString("type");
 
             courseID.setText(sCourseID);
@@ -142,8 +144,8 @@ public class AttendanceActivityNew extends AppCompatActivity {
                             sRoll = new ArrayList<>();
 
                             firebaseFirestore.collection("university").document("just")
-                                    .collection("a")
-                                    .document(sDept)
+                                    .collection(myunit)
+                                    .document(mydepartment)
                                     .collection(sYear)
                                     .document(sSemester)
                                     .collection("student")
@@ -197,73 +199,82 @@ public class AttendanceActivityNew extends AppCompatActivity {
 
             sRoll = new ArrayList<>();
 
-            firebaseFirestore.collection("university").document("just")
-                    .collection("a")
-                    .document(sDept)
-                    .collection(sYear)
-                    .document(sSemester)
-                    .collection("student")
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-                            //;
+            try {
 
-                            if (task.isSuccessful()) {
-                                for (QueryDocumentSnapshot document : task.getResult()) {
+                firebaseFirestore.collection("university").document("just")
+                        .collection(myunit)
+                        .document(mydepartment)
+                        .collection(sYear)
+                        .document(sSemester)
+                        .collection("student")
+                        .get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-                                    if (task.getResult().isEmpty()) {
-                                        Log.d("Error", "onSuccess: LIST EMPTY");
+                                //;
 
-                                        return;
-                                    } else {
-                                        sRoll.add(document.getId());
-                                        Log.e("Error", document.getId());
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
 
+                                        if (task.getResult().isEmpty()) {
+                                            Log.d("Error", "onSuccess: LIST EMPTY");
+
+                                            return;
+                                        } else {
+                                            sRoll.add(document.getId());
+                                            Log.e("Error", document.getId());
+
+                                        }
                                     }
-                                }
 
-                                //checking attendance is present or not
-                                firebaseFirestore.collection("university").document("just")
-                                        .collection("a")
-                                        .document("cse")
-                                        .collection(sYear)
-                                        .document(sSemester)
-                                        .collection("course")
-                                        .document(sCourseID)
-                                        .collection(sRoll.get(1))
-                                        .document(sDate)
-                                        .get()
-                                        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                                if (task.isSuccessful()) {
 
-                                                    if (task.getResult().exists()) {
-                                                        Toast.makeText(AttendanceActivityNew.this, "Today's attendance has been taken", Toast.LENGTH_SHORT).show();
-                                                        finish();
+                                    //checking attendance is present or not
+                                    firebaseFirestore.collection("university").document("just")
+                                            .collection(myunit)
+                                            .document(mydepartment)
+                                            .collection(sYear)
+                                            .document(sSemester)
+                                            .collection("course")
+                                            .document(sCourseID)
+                                            .collection(sRoll.get(1))
+                                            .document(sDate)
+                                            .get()
+                                            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                    if (task.isSuccessful()) {
+
+                                                        if (task.getResult().exists()) {
+                                                            Toast.makeText(AttendanceActivityNew.this, "Today's attendance has been taken", Toast.LENGTH_SHORT).show();
+                                                            finish();
+                                                        } else {
+                                                            attendaneRecyclerAdapter = new AttendaneRecyclerAdapter(AttendanceActivityNew.this, sRoll, sYear, sSemester, sCourseID, sDate, myunit, mydepartment);
+                                                            recyclerView.setAdapter(attendaneRecyclerAdapter);
+                                                            progressDialog.dismiss();
+                                                        }
                                                     } else {
-                                                        attendaneRecyclerAdapter = new AttendaneRecyclerAdapter(AttendanceActivityNew.this, sRoll, sYear, sSemester, sCourseID, sDate);
-                                                        recyclerView.setAdapter(attendaneRecyclerAdapter);
-                                                        progressDialog.dismiss();
+
+                                                        Toast.makeText(AttendanceActivityNew.this, "Error", Toast.LENGTH_SHORT).show();
+
                                                     }
-                                                } else {
-
-                                                    Toast.makeText(AttendanceActivityNew.this, "Error", Toast.LENGTH_SHORT).show();
-
                                                 }
-                                            }
-                                        });
+                                            });
 
-                            } else {
-                                Log.e("Error", "Error getting documents: ", task.getException());
-                                progressDialog.dismiss();
+                                } else {
+                                    Log.e("Error", "Error getting documents: ", task.getException());
+                                    progressDialog.dismiss();
 
+                                }
                             }
-                        }
 
-                    });
+                        });
+            } catch (Exception e) {
+                Toast.makeText(AttendanceActivityNew.this, "No Student in this class", Toast.LENGTH_SHORT).show();
+
+            }
+
 
         }
     }
@@ -279,8 +290,8 @@ public class AttendanceActivityNew extends AppCompatActivity {
 
             final int finalI = i;
             firebaseFirestore.collection("university").document("just")
-                    .collection("a")
-                    .document("cse")
+                    .collection(myunit)
+                    .document(mydepartment)
                     .collection(sYear)
                     .document(sSemester)
                     .collection("course")

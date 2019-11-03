@@ -39,7 +39,7 @@ public class SelectCourseActivity extends AppCompatActivity {
 
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
-    String uid,sCategory;
+    String uid,sCategory,mydepartment,myunit;
 
     List<Course> courseModel;
 
@@ -75,6 +75,8 @@ public class SelectCourseActivity extends AppCompatActivity {
 
         try {
             sType=getIntent().getExtras().getString("type");
+            mydepartment=getIntent().getExtras().getString("department");
+            myunit=getIntent().getExtras().getString("unit");
         }
         catch (Exception e) {
             sType="t";
@@ -89,8 +91,8 @@ public class SelectCourseActivity extends AppCompatActivity {
                     courseModel = new ArrayList<>();
 
                     firebaseFirestore.collection("university").document("just")
-                            .collection("a")
-                            .document("cse")
+                            .collection(myunit)
+                            .document(mydepartment)
                             .collection("teacher")
                             .document(shortName)
                             .collection("course")
@@ -107,7 +109,7 @@ public class SelectCourseActivity extends AppCompatActivity {
                                                 return;
                                             } else {
                                                 courseModel =task.getResult().toObjects(Course.class);
-                                                courseRecyclerAdapter = new CourseRecyclerAdapter(SelectCourseActivity.this, courseModel,"select"+sType);
+                                                courseRecyclerAdapter = new CourseRecyclerAdapter(SelectCourseActivity.this, courseModel,"select"+sType,myunit,mydepartment);
                                                 mRecyclerView.setAdapter(courseRecyclerAdapter);
                                                 progressDialog.dismiss();
                                             }

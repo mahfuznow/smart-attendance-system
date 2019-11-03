@@ -39,6 +39,7 @@ public class StudentAssignActivity extends AppCompatActivity {
 
     String shortName;
     String sYear,sSemester;
+    String myunit,mydepartment;
     ProgressDialog progressDialog;
 
     FirebaseFirestore firebaseFirestore;
@@ -76,6 +77,14 @@ public class StudentAssignActivity extends AppCompatActivity {
         progressDialog.show();
 
 
+        try {
+            mydepartment=getIntent().getExtras().getString("department");
+            myunit=getIntent().getExtras().getString("unit");
+        }
+        catch (Exception e) {
+
+        }
+
 
         final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(StudentAssignActivity.this);
 
@@ -88,47 +97,49 @@ public class StudentAssignActivity extends AppCompatActivity {
         final Spinner semester = view.findViewById(R.id.semester);
         final Button proceed = view.findViewById(R.id.proceed);
 
+        modify.setVisibility(View.GONE);
+
+        year.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sYear= (String) parent.getItemAtPosition(position);
+                if ("--Year--".equals(sYear)) {
+                    sYear="null";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        semester.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sSemester= (String) parent.getItemAtPosition(position);
+                if ("--Semester--".equals(sSemester)) {
+                    sSemester="null";
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
         proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                year.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        sYear= (String) parent.getItemAtPosition(position);
-                        if ("--Year--".equals(sYear)) {
-                            sYear="null";
-                        }
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
-
-                semester.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        sSemester= (String) parent.getItemAtPosition(position);
-                        if ("--Semester--".equals(sSemester)) {
-                            sSemester="null";
-                        }
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
-                });
-
 
                 if ("null".equals(sYear) || "null".equals(sSemester) || TextUtils.isEmpty(sYear) || TextUtils.isEmpty(sSemester) ) {
                     Toast.makeText(StudentAssignActivity.this,"Please fill required fields",Toast.LENGTH_SHORT).show();
 
                 }
                 else {
+                    modify.setVisibility(View.VISIBLE);
                     loadStudent();
                     activateModifyButton();
                     alertDialog.dismiss();
@@ -191,8 +202,8 @@ public class StudentAssignActivity extends AppCompatActivity {
                                         for (int roll=Integer.parseInt(sRoll1);roll<=Integer.parseInt(sRoll2);roll++) {
                                             final int finalRoll = roll;
                                             firebaseFirestore.collection("university").document("just")
-                                                    .collection("a")
-                                                    .document("cse")
+                                                    .collection(myunit)
+                                                    .document(mydepartment)
                                                     .collection(sYear)
                                                     .document(sSemester)
                                                     .collection("student")
@@ -250,8 +261,8 @@ public class StudentAssignActivity extends AppCompatActivity {
                                         setStudent.put("timeStamp",System.currentTimeMillis());
 
                                         firebaseFirestore.collection("university").document("just")
-                                                .collection("a")
-                                                .document("cse")
+                                                .collection(myunit)
+                                                .document(mydepartment)
                                                 .collection(sYear)
                                                 .document(sSemester)
                                                 .collection("student")
@@ -302,8 +313,8 @@ public class StudentAssignActivity extends AppCompatActivity {
                                     if (!TextUtils.isEmpty(sRoll1)) {
 
                                         firebaseFirestore.collection("university").document("just")
-                                                .collection("a")
-                                                .document("cse")
+                                                .collection(myunit)
+                                                .document(mydepartment)
                                                 .collection(sYear)
                                                 .document(sSemester)
                                                 .collection("student")
@@ -359,8 +370,8 @@ public class StudentAssignActivity extends AppCompatActivity {
         sRoll= new ArrayList<>();
 
         firebaseFirestore.collection("university").document("just")
-                .collection("a")
-                .document("cse")
+                .collection(myunit)
+                .document(mydepartment)
                 .collection(sYear)
                 .document(sSemester)
                 .collection("student")

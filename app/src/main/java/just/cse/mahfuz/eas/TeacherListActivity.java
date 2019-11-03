@@ -29,7 +29,7 @@ public class TeacherListActivity extends AppCompatActivity {
     FirebaseFirestore firebaseFirestore;
 
     ProgressDialog progressDialog;
-
+    String mydepartment,myunit;
     List<Teacher> teacherModel;
 
     TeacherRecyclerAdapter teacherRecycleAdapter;
@@ -56,9 +56,16 @@ public class TeacherListActivity extends AppCompatActivity {
 
         teacherModel= new ArrayList<>();
 
+        try {
+            mydepartment=getIntent().getExtras().getString("department");
+            myunit=getIntent().getExtras().getString("unit");
+        }
+        catch (Exception e) {
+
+        }
         firebaseFirestore.collection("university").document("just")
-                .collection("a")
-                .document("cse")
+                .collection(myunit)
+                .document(mydepartment)
                 .collection("teacher")
                 .orderBy("serial", Query.Direction.ASCENDING)
                 .get()
@@ -73,7 +80,7 @@ public class TeacherListActivity extends AppCompatActivity {
                                     return;
                                 } else {
                                     teacherModel=task.getResult().toObjects(Teacher.class);
-                                    teacherRecycleAdapter = new TeacherRecyclerAdapter(TeacherListActivity.this, teacherModel);
+                                    teacherRecycleAdapter = new TeacherRecyclerAdapter(TeacherListActivity.this, teacherModel,myunit,mydepartment);
                                     mRecyclerView.setAdapter(teacherRecycleAdapter);
                                     progressDialog.dismiss();
                                 }

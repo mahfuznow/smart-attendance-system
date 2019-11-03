@@ -29,6 +29,7 @@ public class AttendaneRecyclerAdapter extends RecyclerView.Adapter<AttendaneRecy
     Context context;
     List<String> sRoll;
     String sYear,sSemester,sCourseID,sDate;
+    String myunit, mydepartment;
     private SparseBooleanArray itemStateArray= new SparseBooleanArray();
 
    FirebaseFirestore firebaseFirestore;
@@ -39,13 +40,15 @@ public class AttendaneRecyclerAdapter extends RecyclerView.Adapter<AttendaneRecy
     public AttendaneRecyclerAdapter() {
     }
 
-    public AttendaneRecyclerAdapter(Context context, List<String> sRoll,String sYear,String sSemester,String sCourseID,String sDate) {
+    public AttendaneRecyclerAdapter(Context context, List<String> sRoll,String sYear,String sSemester,String sCourseID,String sDate,String myunit, String mydepartment) {
         this.context = context;
         this.sRoll = sRoll;
         this.sYear=sYear;
         this.sSemester=sSemester;
         this.sCourseID=sCourseID;
         this.sDate=sDate;
+        this.myunit=myunit;
+        this.mydepartment=mydepartment;
         firebaseFirestore = FirebaseFirestore.getInstance();
         progressDialog=new ProgressDialog(context);
 
@@ -184,8 +187,8 @@ public class AttendaneRecyclerAdapter extends RecyclerView.Adapter<AttendaneRecy
 
             final int finalI = i;
             firebaseFirestore.collection("university").document("just")
-                    .collection("a")
-                    .document("cse")
+                    .collection(myunit)
+                    .document(mydepartment)
                     .collection(sYear)
                     .document(sSemester)
                     .collection("course")

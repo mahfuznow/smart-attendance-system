@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void animateImg() {
-       img.animate().translationY(-300).alphaBy(0).setDuration(1000);
+       img.animate().translationY(-500).alphaBy(0).setDuration(1000);
     }
 
     private boolean isNetworkAvailable() {

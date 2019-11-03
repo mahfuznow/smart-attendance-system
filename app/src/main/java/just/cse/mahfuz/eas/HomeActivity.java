@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,7 +25,8 @@ public class HomeActivity extends AppCompatActivity {
     Button attendance,viewAttendance,CTmark,viewCTmark,courseAssign, studentAssign;
 
     FirebaseFirestore firebaseFirestore;
-    String mycategory, uid;
+    TextView heading;
+    String mycategory,mydepartment,myunit, uid;
     FirebaseAuth auth;
 
     ProgressDialog progressDialog;
@@ -36,6 +38,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        heading=findViewById(R.id.heading);
         attendance = findViewById(R.id.attendance);
         viewAttendance = findViewById(R.id.viewAttendance);
 
@@ -59,7 +62,16 @@ public class HomeActivity extends AppCompatActivity {
         firebaseFirestore.collection("users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                mycategory=task.getResult().getString("category");
+                try {
+                    mycategory=task.getResult().getString("category");
+                    mydepartment=task.getResult().getString("department");
+                    myunit=task.getResult().getString("unit");
+                    heading.setText("Department of "+mydepartment.toUpperCase());
+                }
+                catch (Exception e) {
+
+                }
+
 
                 if ("admin".equals(mycategory)) {
                     attendance.setVisibility(View.GONE);
@@ -116,25 +128,37 @@ public class HomeActivity extends AppCompatActivity {
         attendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this,SelectCourseActivity.class));
+                Intent intent= new Intent(HomeActivity.this,SelectCourseActivity.class);
+                intent.putExtra("department",mydepartment);
+                intent.putExtra("unit",myunit);
+                intent.putExtra("type","t");
+                startActivity(intent);
             }
         });
         courseAssign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this,TeacherListActivity.class));
+                Intent intent= new Intent(HomeActivity.this,TeacherListActivity.class);
+                intent.putExtra("department",mydepartment);
+                intent.putExtra("unit",myunit);
+                startActivity(intent);
             }
         });
         studentAssign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this,StudentAssignActivity.class));
+                Intent intent= new Intent(HomeActivity.this,StudentAssignActivity.class);
+                intent.putExtra("department",mydepartment);
+                intent.putExtra("unit",myunit);
+                startActivity(intent);
             }
         });
         viewAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(HomeActivity.this,SelectCourseActivity.class);
+                intent.putExtra("department",mydepartment);
+                intent.putExtra("unit",myunit);
                 intent.putExtra("type","v");
                 startActivity(intent);
             }

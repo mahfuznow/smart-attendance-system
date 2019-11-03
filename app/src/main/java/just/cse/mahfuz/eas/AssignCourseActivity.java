@@ -35,6 +35,7 @@ import just.cse.mahfuz.eas.model.Course;
 
 public class AssignCourseActivity extends AppCompatActivity {
     String shortName;
+    String myunit,mydepartment;
     ProgressDialog progressDialog;
 
     FirebaseFirestore firebaseFirestore;
@@ -69,6 +70,8 @@ public class AssignCourseActivity extends AppCompatActivity {
 
         try {
             shortName=getIntent().getExtras().getString("shortName");
+            myunit=getIntent().getExtras().getString("unit");
+            mydepartment=getIntent().getExtras().getString("department");
         }
         catch (Exception e) {
             shortName="SMG";
@@ -112,8 +115,8 @@ public class AssignCourseActivity extends AppCompatActivity {
                             setCourse.put("courseName",sCourseName);
                             setCourse.put("teacher",shortName);
                             firebaseFirestore.collection("university").document("just")
-                                    .collection("a")
-                                    .document("cse")
+                                    .collection(myunit)
+                                    .document(mydepartment)
                                     .collection("teacher")
                                     .document(shortName)
                                     .collection("course")
@@ -158,8 +161,8 @@ public class AssignCourseActivity extends AppCompatActivity {
         courseModel = new ArrayList<>();
 
         firebaseFirestore.collection("university").document("just")
-                .collection("a")
-                .document("cse")
+                .collection(myunit)
+                .document(mydepartment)
                 .collection("teacher")
                 .document(shortName)
                 .collection("course")
@@ -176,7 +179,7 @@ public class AssignCourseActivity extends AppCompatActivity {
                                     return;
                                 } else {
                                     courseModel =task.getResult().toObjects(Course.class);
-                                    courseRecyclerAdapter = new CourseRecyclerAdapter(AssignCourseActivity.this, courseModel,"assign");
+                                    courseRecyclerAdapter = new CourseRecyclerAdapter(AssignCourseActivity.this, courseModel,"assign",myunit,mydepartment);
                                     mRecyclerView.setAdapter(courseRecyclerAdapter);
                                     progressDialog.dismiss();
                                 }

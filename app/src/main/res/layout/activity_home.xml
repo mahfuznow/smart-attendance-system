@@ -19,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/heading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
@@ -27,7 +28,7 @@
         android:layout_marginBottom="2dp"
         android:fontFamily="@font/regular"
         android:gravity="center"
-        android:text="Department of CSE"
+        android:text=""
         android:textColor="#000000"
         android:textSize="20sp" />
 

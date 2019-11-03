@@ -25,12 +25,15 @@ public class TeacherRecyclerAdapter extends RecyclerView.Adapter<TeacherRecycler
     List<Teacher> teacherList;
 
     String sName,sDesignation,sEmail,sImage,sShortName;
+    String myunit,mydepartment;
     public TeacherRecyclerAdapter() {
     }
 
-    public TeacherRecyclerAdapter(Context context, List<Teacher> teacherList) {
+    public TeacherRecyclerAdapter(Context context, List<Teacher> teacherList,String myunit,String mydepartment) {
         this.context = context;
         this.teacherList = teacherList;
+        this.myunit = myunit;
+        this.mydepartment = mydepartment;
 
     }
 
@@ -71,6 +74,8 @@ public class TeacherRecyclerAdapter extends RecyclerView.Adapter<TeacherRecycler
                String  shortName= teacherViewHolder.shortName.getText().toString();
                 Intent intent= new Intent(context, AssignCourseActivity.class);
                 intent.putExtra("shortName",shortName);
+                intent.putExtra("department",mydepartment);
+                intent.putExtra("unit",myunit);
                 context.startActivity(intent);
             }
         });
