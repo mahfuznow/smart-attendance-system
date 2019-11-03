@@ -5,9 +5,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -17,9 +19,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
@@ -37,6 +41,8 @@ public class LoginActivity extends AppCompatActivity {
     String myemail, mypass;
     ProgressDialog dialog;
     FirebaseAuth mauth;
+
+    TextView forgot,atvPassword;
 
 
     @Override
@@ -60,6 +66,8 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.login);
         email = findViewById(R.id.email);
         pass = findViewById(R.id.pass);
+        forgot = findViewById(R.id.forgot);
+        atvPassword = findViewById(R.id.atvPassword);
 
         animateImg();
 
@@ -68,6 +76,58 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(LoginActivity.this);
         mauth = FirebaseAuth.getInstance();
 
+        forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pass.setVisibility(View.GONE);
+                atvPassword.setVisibility(View.GONE);
+                forgot.setText("Go to LogIn");
+                login.setText("Reset Passowrd");
+                forgot.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = getIntent();
+                        finish();
+                        startActivity(intent);
+                    }
+                });
+                login.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.setMessage("Resetting password ...");
+                        dialog.show();
+                        String myemail = email.getText().toString().trim();
+                        if ((!TextUtils.isEmpty(myemail))) {
+                                    FirebaseAuth.getInstance().sendPasswordResetEmail(myemail)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(LoginActivity.this, "Please check your email, we have sent a link to reset your password", Toast.LENGTH_SHORT).show();
+                                                dialog.dismiss();
+                                                Intent intent = getIntent();
+                                                finish();
+                                                startActivity(intent);
+
+                                            }
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Toast.makeText(LoginActivity.this, "An Error occured", Toast.LENGTH_SHORT).show();
+                                            dialog.dismiss();
+                                        }
+                                    });
+                        }
+                        else {
+                            Toast.makeText(LoginActivity.this, "Please input Email", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+
+                    }
+                });
+            }
+        });
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +172,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void animateImg() {
-       img.animate().translationY(-500).alphaBy(0).setDuration(1000);
+        img.animate().translationY(-500).alphaBy(0).setDuration(1000);
     }
 
     private boolean isNetworkAvailable() {
