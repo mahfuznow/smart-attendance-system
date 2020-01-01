@@ -1,7 +1,7 @@
 package just.cse.mahfuz.eas.activity;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,7 +37,8 @@ import just.cse.mahfuz.eas.model.Course;
 public class AssignCourseActivity extends AppCompatActivity {
     String shortName;
     String myunit,mydepartment;
-    ProgressDialog progressDialog;
+    //ProgressDialog progressDialog;
+    android.app.AlertDialog progressDialog;
 
     FirebaseFirestore firebaseFirestore;
 
@@ -59,14 +60,19 @@ public class AssignCourseActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
-        progressDialog = new ProgressDialog(AssignCourseActivity.this);
+        //progressDialog = new ProgressDialog(AssignCourseActivity.this);
         addCourse=findViewById(R.id.add);
 
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        progressDialog.setMessage("Loading..");
+        //custom progress dialog
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        View view1 = LayoutInflater.from(this).inflate(R.layout.custom_dialog_loading, null);
+        builder.setView(view1);
+        builder.setCancelable(true);
+        progressDialog = builder.create();
         progressDialog.show();
 
         try {

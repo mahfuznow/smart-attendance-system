@@ -1,6 +1,5 @@
 package just.cse.mahfuz.eas.activity;
 
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -12,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -42,7 +41,9 @@ public class LoginActivity extends AppCompatActivity {
 
     LinearLayout loginForm, forgetForm;
 
-    ProgressDialog dialog;
+    //ProgressDialog progressDialog;
+    android.app.AlertDialog progressDialog;
+
     FirebaseAuth mauth;
 
 
@@ -82,7 +83,18 @@ public class LoginActivity extends AppCompatActivity {
 
         //animateImg();
 
-        dialog = new ProgressDialog(LoginActivity.this);
+        //progressDialog = new ProgressDialog(LoginActivity.this);
+
+        //creating custom loading
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(LoginActivity.this);
+
+        View view1 = LayoutInflater.from(LoginActivity.this).inflate(R.layout.custom_dialog_loading, null);
+        builder.setView(view1);
+        builder.setCancelable(true);
+        progressDialog = builder.create();
+
+
+
 
         FirebaseApp.initializeApp(LoginActivity.this);
         mauth = FirebaseAuth.getInstance();
@@ -102,12 +114,25 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                progressDialog.show();
 
-                dialog.setMessage("logging In ...");
-                dialog.show();
+
+//                alertDialog.setOnKeyListener(new Dialog.OnKeyListener() {
+//                    @Override
+//                    public boolean onKey(DialogInterface arg0, int keyCode,
+//                                         KeyEvent event) {
+//                        if (keyCode == KeyEvent.KEYCODE_BACK) {
+//                            finish();
+//                        }
+//                        return true;
+//                    }
+//                });
+                //progressDialog.setMessage("logging In ...");
+                //progressDialog.show();
 
                 myemailL = emailL.getText().toString().trim();
                 mypassL = passL.getText().toString().trim();
@@ -119,22 +144,22 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                dialog.dismiss();
+                                progressDialog.dismiss();
                                 Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                                 startActivity(intent);
 
                             } else if (!isNetworkAvailable()) {
                                 Toast.makeText(LoginActivity.this, "Please check your internet connection and try again", Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
+                                progressDialog.dismiss();
                             } else {
                                 Toast.makeText(LoginActivity.this, "LogIn failed. Please input correct Email & password", Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
+                                progressDialog.dismiss();
                             }
                         }
                     });
                 } else {
                     Toast.makeText(LoginActivity.this, "Please input both Email & password", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
+                    progressDialog.dismiss();
                 }
 
             }
@@ -146,8 +171,8 @@ public class LoginActivity extends AppCompatActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog.setMessage("Resetting password ...");
-                dialog.show();
+                progressDialog.setMessage("Resetting password ...");
+                progressDialog.show();
                 String myemailF = emailL.getText().toString().trim();
                 if ((!TextUtils.isEmpty(myemailF))) {
                     FirebaseAuth.getInstance().sendPasswordResetEmail(myemailF)
@@ -156,7 +181,7 @@ public class LoginActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(LoginActivity.this, "Please check your emailL, we have sent a link to reset your password", Toast.LENGTH_SHORT).show();
-                                        dialog.dismiss();
+                                        progressDialog.dismiss();
                                         loginForm.setVisibility(View.VISIBLE);
                                         forgetForm.setVisibility(View.GONE);
                                     }
@@ -165,13 +190,13 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Toast.makeText(LoginActivity.this, "An Error occured", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
+                            progressDialog.dismiss();
                         }
                     });
                 }
                 else {
                     Toast.makeText(LoginActivity.this, "Please input Email", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
+                    progressDialog.dismiss();
                 }
 
             }

@@ -46,7 +46,7 @@ public class StudentAssignActivity extends AppCompatActivity {
     String shortName;
     String sYear,sSemester;
     String myunit,mydepartment;
-    ProgressDialog progressDialog;
+    AlertDialog progressDialog;
 
     FirebaseFirestore firebaseFirestore;
 
@@ -72,7 +72,14 @@ public class StudentAssignActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
-        progressDialog = new ProgressDialog(StudentAssignActivity.this);
+        //progressDialog = new ProgressDialog(StudentAssignActivity.this);
+        //custom progress dialog
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        View view1 = LayoutInflater.from(this).inflate(R.layout.custom_dialog_loading, null);
+        builder.setView(view1);
+        builder.setCancelable(true);
+        progressDialog = builder.create();
+
         modify =findViewById(R.id.modify);
 
         mRecyclerView = findViewById(R.id.recyclerView);
@@ -88,12 +95,12 @@ public class StudentAssignActivity extends AppCompatActivity {
         }
 
 
-        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(StudentAssignActivity.this);
+        final android.app.AlertDialog.Builder builder1 = new android.app.AlertDialog.Builder(StudentAssignActivity.this);
 
         View view = LayoutInflater.from(StudentAssignActivity.this).inflate(R.layout.custom_dialog_input_year_semester, null);
-        builder.setView(view);
-        builder.setCancelable(true);
-        final AlertDialog alertDialog = builder.create();
+        builder1.setView(view);
+        builder1.setCancelable(true);
+        final AlertDialog alertDialog = builder1.create();
 
         final Spinner year = view.findViewById(R.id.year);
         final Spinner semester = view.findViewById(R.id.semester);
@@ -201,7 +208,7 @@ public class StudentAssignActivity extends AppCompatActivity {
                             proceed.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    progressDialog.setMessage("Please wait...");
+                                    //progressDialog.setMessage("Please wait...");
                                     progressDialog.show();
 
                                     final String sRoll1,sRoll2;
@@ -264,7 +271,7 @@ public class StudentAssignActivity extends AppCompatActivity {
                             proceed.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    progressDialog.setMessage("Please wait...");
+                                    //progressDialog.setMessage("Please wait...");
                                     progressDialog.show();
 
                                     final String sRoll1;
@@ -318,7 +325,7 @@ public class StudentAssignActivity extends AppCompatActivity {
                             proceed.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    progressDialog.setMessage("Please wait...");
+                                    //progressDialog.setMessage("Please wait...");
                                     progressDialog.show();
 
                                     final String sRoll1;
@@ -381,7 +388,7 @@ public class StudentAssignActivity extends AppCompatActivity {
 
     public void loadStudent() {
 
-        progressDialog.setMessage("Loading..");
+        //progressDialog.setMessage("Loading..");
         progressDialog.show();
 
         sRoll= new ArrayList<>();

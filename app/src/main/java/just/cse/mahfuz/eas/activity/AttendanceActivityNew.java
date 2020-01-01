@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.util.SparseBooleanArray;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -51,7 +53,7 @@ public class AttendanceActivityNew extends AppCompatActivity {
 
     int iRoll = 0;
 
-    ProgressDialog progressDialog;
+    android.app.AlertDialog progressDialog;
 
     FirebaseFirestore firebaseFirestore;
 
@@ -82,10 +84,19 @@ public class AttendanceActivityNew extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.hasFixedSize();
         firebaseFirestore = FirebaseFirestore.getInstance();
-        progressDialog = new ProgressDialog(AttendanceActivityNew.this);
+//        progressDialog = new ProgressDialog(AttendanceActivityNew.this);
+//
+//        progressDialog.setMessage("Loading..");
+//        progressDialog.show();
 
-        progressDialog.setMessage("Loading..");
+        //custom progress dialog
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        View view1 = LayoutInflater.from(this).inflate(R.layout.custom_dialog_loading, null);
+        builder.setView(view1);
+        builder.setCancelable(true);
+        progressDialog = builder.create();
         progressDialog.show();
+
 
         try {
             //sDept = getIntent().getExtras().getString("dept");

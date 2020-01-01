@@ -14,7 +14,7 @@
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="220dp"
         android:contentDescription="header"
         android:background="@drawable/header"
         android:orientation="vertical"
@@ -147,7 +147,9 @@
                 android:drawableRight="@drawable/ic_person"
                 android:drawablePadding="30dp"
                 android:inputType="textEmailAddress"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textColor="#4B4B4B"
+                />
             <TextView
                 android:id="@+id/tvPassL"
                 android:layout_width="wrap_content"
@@ -168,7 +170,9 @@
                 android:drawableRight="@drawable/ic_lock"
                 android:drawablePadding="30dp"
                 android:inputType="textPassword"
-                android:padding="10dp" />
+                android:padding="10dp"
+                android:textColor="#4B4B4B"
+                />
 
             <Button
                 android:id="@+id/login"

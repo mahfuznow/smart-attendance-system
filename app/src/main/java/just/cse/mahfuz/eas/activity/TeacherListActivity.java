@@ -1,5 +1,6 @@
 package just.cse.mahfuz.eas.activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -8,7 +9,9 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -29,7 +32,7 @@ public class TeacherListActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
     FirebaseFirestore firebaseFirestore;
 
-    ProgressDialog progressDialog;
+    AlertDialog progressDialog;
     String mydepartment,myunit;
     List<Teacher> teacherModel;
 
@@ -52,7 +55,12 @@ public class TeacherListActivity extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         progressDialog = new ProgressDialog(TeacherListActivity.this);
 
-        progressDialog.setMessage("Loading..");
+        //custom progress dialog
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        View view1 = LayoutInflater.from(this).inflate(R.layout.custom_dialog_loading, null);
+        builder.setView(view1);
+        builder.setCancelable(true);
+        progressDialog = builder.create();
         progressDialog.show();
 
         teacherModel= new ArrayList<>();

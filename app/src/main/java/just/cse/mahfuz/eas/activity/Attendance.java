@@ -1,11 +1,13 @@
 package just.cse.mahfuz.eas.activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,7 +37,8 @@ public class Attendance extends AppCompatActivity {
 
     int iRoll=0;
 
-    ProgressDialog progressDialog;
+    android.app.AlertDialog progressDialog;
+    //ProgressDialog progressDialog;
 
     FirebaseFirestore firebaseFirestore;
 
@@ -52,7 +55,14 @@ public class Attendance extends AppCompatActivity {
         absent = findViewById(R.id.absent);
 
         firebaseFirestore = FirebaseFirestore.getInstance();
-        progressDialog = new ProgressDialog(Attendance.this);
+        //progressDialog = new ProgressDialog(Attendance.this);
+
+        //custom progress dialog
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        View view1 = LayoutInflater.from(this).inflate(R.layout.custom_dialog_loading, null);
+        builder.setView(view1);
+        builder.setCancelable(true);
+        progressDialog = builder.create();
 
         try {
             sDept = getIntent().getExtras().getString("dept");

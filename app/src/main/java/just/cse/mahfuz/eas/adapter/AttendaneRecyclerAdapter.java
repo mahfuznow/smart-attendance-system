@@ -1,6 +1,7 @@
 package just.cse.mahfuz.eas.adapter;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import androidx.annotation.NonNull;
@@ -33,7 +34,7 @@ public class AttendaneRecyclerAdapter extends RecyclerView.Adapter<AttendaneRecy
     private SparseBooleanArray itemStateArray= new SparseBooleanArray();
 
    FirebaseFirestore firebaseFirestore;
-   ProgressDialog progressDialog;
+   AlertDialog progressDialog;
 
 
 
@@ -50,7 +51,13 @@ public class AttendaneRecyclerAdapter extends RecyclerView.Adapter<AttendaneRecy
         this.myunit=myunit;
         this.mydepartment=mydepartment;
         firebaseFirestore = FirebaseFirestore.getInstance();
-        progressDialog=new ProgressDialog(context);
+        //progressDialog=new ProgressDialog(context);
+        //custom progress dialog
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
+        View view1 = LayoutInflater.from(context).inflate(R.layout.custom_dialog_loading, null);
+        builder.setView(view1);
+        builder.setCancelable(true);
+        progressDialog = builder.create();
 
     }
 
@@ -176,7 +183,7 @@ public class AttendaneRecyclerAdapter extends RecyclerView.Adapter<AttendaneRecy
 
     public void upload() {
 
-        progressDialog.setMessage("Submiting..");
+        //progressDialog.setMessage("Submiting..");
         progressDialog.show();
 
 

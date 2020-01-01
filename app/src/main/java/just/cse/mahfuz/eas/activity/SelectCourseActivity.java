@@ -1,5 +1,6 @@
 package just.cse.mahfuz.eas.activity;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -8,7 +9,9 @@ import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -36,7 +39,7 @@ import just.cse.mahfuz.eas.model.Course;
 public class SelectCourseActivity extends AppCompatActivity {
 
     String shortName;
-    ProgressDialog progressDialog;
+    AlertDialog progressDialog;
 
     FirebaseFirestore firebaseFirestore;
     FirebaseAuth firebaseAuth;
@@ -63,14 +66,20 @@ public class SelectCourseActivity extends AppCompatActivity {
         firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth=FirebaseAuth.getInstance();
         uid=firebaseAuth.getUid();
-        progressDialog = new ProgressDialog(SelectCourseActivity.this);
+        //progressDialog = new ProgressDialog(SelectCourseActivity.this);
+        //custom progress dialog
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        View view1 = LayoutInflater.from(this).inflate(R.layout.custom_dialog_loading, null);
+        builder.setView(view1);
+        builder.setCancelable(true);
+        progressDialog = builder.create();
+
         addCourse=findViewById(R.id.add);
 
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        progressDialog.setMessage("Loading..");
         progressDialog.show();
 
 

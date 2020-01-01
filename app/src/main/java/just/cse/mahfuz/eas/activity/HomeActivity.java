@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
     String mycategory, mydepartment, myunit, uid;
     FirebaseAuth auth;
 
-    ProgressDialog progressDialog;
+    android.app.AlertDialog progressDialog;
 
 
     @Override
@@ -64,11 +65,19 @@ public class HomeActivity extends AppCompatActivity {
         uid = auth.getUid();
 
 
-        progressDialog = new ProgressDialog(HomeActivity.this);
+//        progressDialog = new ProgressDialog(HomeActivity.this);
+//
+//        progressDialog.setMessage("Please wait...");
+//        progressDialog.show();
+//        progressDialog.setCancelable(false);
 
-        progressDialog.setMessage("Please wait...");
+        //custom progress dialog
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        View view1 = LayoutInflater.from(this).inflate(R.layout.custom_dialog_loading, null);
+        builder.setView(view1);
+        builder.setCancelable(false);
+        progressDialog = builder.create();
         progressDialog.show();
-        progressDialog.setCancelable(false);
 
 
         firebaseFirestore.collection("users").document(uid).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
