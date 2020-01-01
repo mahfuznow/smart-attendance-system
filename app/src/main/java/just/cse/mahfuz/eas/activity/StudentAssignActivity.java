@@ -1,15 +1,19 @@
 package just.cse.mahfuz.eas.activity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +25,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -74,10 +79,6 @@ public class StudentAssignActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        progressDialog.setMessage("Loading..");
-        progressDialog.show();
-
-
         try {
             mydepartment=getIntent().getExtras().getString("department");
             myunit=getIntent().getExtras().getString("unit");
@@ -97,6 +98,18 @@ public class StudentAssignActivity extends AppCompatActivity {
         final Spinner year = view.findViewById(R.id.year);
         final Spinner semester = view.findViewById(R.id.semester);
         final Button proceed = view.findViewById(R.id.proceed);
+
+
+        alertDialog.setOnKeyListener(new Dialog.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface arg0, int keyCode,
+                                 KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                  finish();
+                }
+                return true;
+            }
+        });
 
         modify.setVisibility(View.GONE);
 
@@ -368,6 +381,9 @@ public class StudentAssignActivity extends AppCompatActivity {
 
     public void loadStudent() {
 
+        progressDialog.setMessage("Loading..");
+        progressDialog.show();
+
         sRoll= new ArrayList<>();
 
         firebaseFirestore.collection("university").document("just")
@@ -427,4 +443,6 @@ public class StudentAssignActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 }

@@ -53,6 +53,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = mauth.getCurrentUser();
         if (currentUser != null) {
+            finish();
             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(intent);
         }
@@ -62,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
         img = findViewById(R.id.img);
@@ -196,6 +197,7 @@ public class LoginActivity extends AppCompatActivity {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Are you sure want to exit?");
         builder.setCancelable(true);
+        builder.setIcon(R.drawable.app_icon);
 
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
