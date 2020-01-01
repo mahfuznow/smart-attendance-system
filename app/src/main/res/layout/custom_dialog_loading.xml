@@ -11,10 +11,10 @@
     >
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animation_view"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:scaleType="centerCrop"
-            app:lottie_rawRes="@raw/material_wave_loading"
+            app:lottie_rawRes="@raw/loading_anim_new"
             app:lottie_loop="true"
             app:lottie_autoPlay="true"
             android:layout_gravity="center"
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:text="Loading.."
             android:textSize="18dp"
-            android:layout_margin="10dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/regular"
             android:layout_gravity="center"
             android:gravity="center"
