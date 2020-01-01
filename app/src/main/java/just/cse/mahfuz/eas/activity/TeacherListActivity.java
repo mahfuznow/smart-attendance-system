@@ -1,4 +1,4 @@
-package just.cse.mahfuz.eas;
+package just.cse.mahfuz.eas.activity;
 
 import android.app.ProgressDialog;
 import androidx.annotation.NonNull;
@@ -20,6 +20,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import just.cse.mahfuz.eas.R;
 import just.cse.mahfuz.eas.adapter.TeacherRecyclerAdapter;
 import just.cse.mahfuz.eas.model.Teacher;
 

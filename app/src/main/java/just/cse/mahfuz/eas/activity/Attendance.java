@@ -1,4 +1,4 @@
-package just.cse.mahfuz.eas;
+package just.cse.mahfuz.eas.activity;
 
 import android.app.ProgressDialog;
 import androidx.annotation.NonNull;
@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import just.cse.mahfuz.eas.R;
 
 public class Attendance extends AppCompatActivity {
 

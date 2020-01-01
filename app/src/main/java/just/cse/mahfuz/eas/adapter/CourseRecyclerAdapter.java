@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import just.cse.mahfuz.eas.AttendanceActivityNew;
+import just.cse.mahfuz.eas.activity.AttendanceActivityNew;
 import just.cse.mahfuz.eas.R;
 import just.cse.mahfuz.eas.model.Course;
 

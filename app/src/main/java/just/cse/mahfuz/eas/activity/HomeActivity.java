@@ -1,4 +1,4 @@
-package just.cse.mahfuz.eas;
+package just.cse.mahfuz.eas.activity;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -20,6 +20,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import just.cse.mahfuz.eas.R;
 
 public class HomeActivity extends AppCompatActivity {
     Button attendance,viewAttendance,CTmark,viewCTmark,courseAssign, studentAssign;

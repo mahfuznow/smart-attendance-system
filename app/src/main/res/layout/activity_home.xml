@@ -7,7 +7,7 @@
     android:background="#FAE0DFDF"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
-    tools:context=".HomeActivity">
+    tools:context=".activity.HomeActivity">
 
     <ImageView
         android:layout_width="match_parent"

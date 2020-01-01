@@ -1,4 +1,4 @@
-package just.cse.mahfuz.eas;
+package just.cse.mahfuz.eas.activity;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import just.cse.mahfuz.eas.R;
 import just.cse.mahfuz.eas.adapter.AttendaneRecyclerAdapter;
 import just.cse.mahfuz.eas.adapter.ViewAttendaneRecyclerAdapter;
 

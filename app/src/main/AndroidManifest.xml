@@ -10,22 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ViewAttendanceActivity" />
-        <activity android:name=".StudentAssignActivity" />
-        <activity android:name=".SelectCourseActivity" />
-        <activity android:name=".AttendanceActivityNew" />
-        <activity android:name=".AssignCourseActivity" />
-        <activity android:name=".TeacherListActivity" />
-        <activity android:name=".Attendance" />
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".activity.ViewAttendanceActivity" />
+        <activity android:name=".activity.StudentAssignActivity" />
+        <activity android:name=".activity.SelectCourseActivity" />
+        <activity android:name=".activity.AttendanceActivityNew" />
+        <activity android:name=".activity.AssignCourseActivity" />
+        <activity android:name=".activity.TeacherListActivity" />
+        <activity android:name=".activity.Attendance" />
+        <activity android:name=".activity.HomeActivity" />
 
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.LoginActivity"
             android:theme="@style/NoActionBar"></activity>
 
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".activity.SplashScreenActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

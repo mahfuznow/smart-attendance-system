@@ -1,4 +1,4 @@
-package just.cse.mahfuz.eas;
+package just.cse.mahfuz.eas.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -1,4 +1,4 @@
-package just.cse.mahfuz.eas;
+package just.cse.mahfuz.eas.activity;
 
 import android.app.ProgressDialog;
 import androidx.annotation.NonNull;
@@ -29,6 +29,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import just.cse.mahfuz.eas.R;
 import just.cse.mahfuz.eas.adapter.CourseRecyclerAdapter;
 import just.cse.mahfuz.eas.model.Course;
 

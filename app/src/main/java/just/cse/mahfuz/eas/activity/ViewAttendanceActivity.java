@@ -1,7 +1,9 @@
-package just.cse.mahfuz.eas;
+package just.cse.mahfuz.eas.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import just.cse.mahfuz.eas.R;
 
 public class ViewAttendanceActivity extends AppCompatActivity {
 

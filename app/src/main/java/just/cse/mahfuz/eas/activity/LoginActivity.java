@@ -1,4 +1,4 @@
-package just.cse.mahfuz.eas;
+package just.cse.mahfuz.eas.activity;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -14,11 +14,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,18 +29,23 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import just.cse.mahfuz.eas.R;
 
 public class LoginActivity extends AppCompatActivity {
 
 
     CircleImageView img;
-    Button login;
-    EditText email, pass;
-    String myemail, mypass;
+    Button login,reset;
+    EditText emailL, passL,emailF;
+    TextView forgot,backToLogin;
+    String myemailL, mypassL,myemailF;
+
+    LinearLayout loginForm, forgetForm;
+
     ProgressDialog dialog;
     FirebaseAuth mauth;
 
-    TextView forgot,atvPassword;
+
 
 
     @Override
@@ -64,12 +67,19 @@ public class LoginActivity extends AppCompatActivity {
 
         img = findViewById(R.id.img);
         login = findViewById(R.id.login);
-        email = findViewById(R.id.email);
-        pass = findViewById(R.id.pass);
-        forgot = findViewById(R.id.forgot);
-        atvPassword = findViewById(R.id.atvPassword);
+        reset= findViewById(R.id.reset);
+        emailL = findViewById(R.id.etEmailL);
+        emailF= findViewById(R.id.etEmailF);
+        passL = findViewById(R.id.etPassL);
 
-        animateImg();
+        forgot = findViewById(R.id.forgot);
+        backToLogin = findViewById(R.id.backToLogin);
+
+        loginForm= findViewById(R.id.loginFormL);
+        forgetForm = findViewById(R.id.forgetFormF);
+
+
+        //animateImg();
 
         dialog = new ProgressDialog(LoginActivity.this);
 
@@ -79,53 +89,15 @@ public class LoginActivity extends AppCompatActivity {
         forgot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                pass.setVisibility(View.GONE);
-                atvPassword.setVisibility(View.GONE);
-                forgot.setText("Go to LogIn");
-                login.setText("Reset Passowrd");
-                forgot.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = getIntent();
-                        finish();
-                        startActivity(intent);
-                    }
-                });
-                login.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.setMessage("Resetting password ...");
-                        dialog.show();
-                        String myemail = email.getText().toString().trim();
-                        if ((!TextUtils.isEmpty(myemail))) {
-                                    FirebaseAuth.getInstance().sendPasswordResetEmail(myemail)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Toast.makeText(LoginActivity.this, "Please check your email, we have sent a link to reset your password", Toast.LENGTH_SHORT).show();
-                                                dialog.dismiss();
-                                                Intent intent = getIntent();
-                                                finish();
-                                                startActivity(intent);
-
-                                            }
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(LoginActivity.this, "An Error occured", Toast.LENGTH_SHORT).show();
-                                            dialog.dismiss();
-                                        }
-                                    });
-                        }
-                        else {
-                            Toast.makeText(LoginActivity.this, "Please input Email", Toast.LENGTH_SHORT).show();
-                            dialog.dismiss();
-                        }
-
-                    }
-                });
+                loginForm.setVisibility(View.GONE);
+                forgetForm.setVisibility(View.VISIBLE);
+            }
+        });
+        backToLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loginForm.setVisibility(View.VISIBLE);
+                forgetForm.setVisibility(View.GONE);
             }
         });
 
@@ -136,13 +108,13 @@ public class LoginActivity extends AppCompatActivity {
                 dialog.setMessage("logging In ...");
                 dialog.show();
 
-                myemail = email.getText().toString().trim();
-                mypass = pass.getText().toString().trim();
+                myemailL = emailL.getText().toString().trim();
+                mypassL = passL.getText().toString().trim();
 
 
-                if ((!TextUtils.isEmpty(myemail)) && (!TextUtils.isEmpty(mypass))) {
+                if ((!TextUtils.isEmpty(myemailL)) && (!TextUtils.isEmpty(mypassL))) {
 
-                    mauth.signInWithEmailAndPassword(myemail, mypass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    mauth.signInWithEmailAndPassword(myemailL, mypassL).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
@@ -164,6 +136,42 @@ public class LoginActivity extends AppCompatActivity {
                     dialog.dismiss();
                 }
 
+            }
+        });
+
+
+
+
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.setMessage("Resetting password ...");
+                dialog.show();
+                String myemailF = emailL.getText().toString().trim();
+                if ((!TextUtils.isEmpty(myemailF))) {
+                    FirebaseAuth.getInstance().sendPasswordResetEmail(myemailF)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(LoginActivity.this, "Please check your emailL, we have sent a link to reset your password", Toast.LENGTH_SHORT).show();
+                                        dialog.dismiss();
+                                        loginForm.setVisibility(View.VISIBLE);
+                                        forgetForm.setVisibility(View.GONE);
+                                    }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(LoginActivity.this, "An Error occured", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+                    });
+                }
+                else {
+                    Toast.makeText(LoginActivity.this, "Please input Email", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
 
             }
         });

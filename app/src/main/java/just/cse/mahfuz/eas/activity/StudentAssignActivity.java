@@ -1,4 +1,4 @@
-package just.cse.mahfuz.eas;
+package just.cse.mahfuz.eas.activity;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import just.cse.mahfuz.eas.R;
 import just.cse.mahfuz.eas.adapter.StudentRecyclerAdapter;
 
 public class StudentAssignActivity extends AppCompatActivity {

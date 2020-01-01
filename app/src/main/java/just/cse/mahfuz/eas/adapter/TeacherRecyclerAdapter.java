@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import just.cse.mahfuz.eas.AssignCourseActivity;
+import just.cse.mahfuz.eas.activity.AssignCourseActivity;
 import just.cse.mahfuz.eas.R;
 import just.cse.mahfuz.eas.model.Teacher;
 
